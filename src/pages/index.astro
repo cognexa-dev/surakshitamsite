@@ -1,0 +1,204 @@
+---
+import MarketingLayout from "../layouts/MarketingLayout.astro";
+import ProductCard from "../components/shared/ProductCard.astro";
+import CTASection from "../components/shared/CTASection.astro";
+import TrustBar from "../components/shared/TrustBar.astro";
+import FAQ from "../components/shared/FAQ.astro";
+import { surakshitamProducts } from "../data/products";
+import { cybersecurityFaqs } from "../data/faqs";
+import { siteConfig } from "../data/site";
+
+const site = siteConfig.surakshitam;
+const cognexa = siteConfig.cognexa;
+
+const trustItems = [
+  { value: "7", label: "Security Products" },
+  { value: "10+", label: "Years Experience" },
+  { value: "24/7", label: "Monitoring & Support" },
+  { value: "Free", label: "Initial Assessment" },
+];
+---
+
+<MarketingLayout
+  title="Surakshitam — Complete Cybersecurity Defense Suite"
+  description="Surakshitam provides managed firewall, vulnerability assessment, penetration testing, WAF, VPN, captive portal, and network monitoring for organizations in India."
+>
+  <!-- Hero -->
+  <section class="relative pt-20 pb-24 overflow-hidden bg-[#0a0f1a]">
+    <div class="absolute inset-0 bg-gradient-to-br from-red-950/20 via-[#0a0f1a] to-slate-900/50 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-red-900/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-red-400 uppercase tracking-widest mb-4">
+          Cybersecurity Suite by CogNexa
+        </p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight text-balance mb-6">
+          Complete Cybersecurity Defense for Your Business
+        </h1>
+        <p class="text-lg md:text-xl text-slate-300 leading-relaxed mb-8 max-w-2xl">
+          Surakshitam helps protect your network, applications, users, and infrastructure with managed firewall, vulnerability assessment, penetration testing, WAF, VPN, captive portal, and monitoring solutions.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="/security-assessment/"
+            class="inline-flex items-center justify-center px-8 py-3.5 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg transition-colors text-base"
+            data-event="security_assessment_request"
+            data-location="hero"
+          >
+            Get Free Security Assessment
+          </a>
+          <a
+            href="/cybersecurity-suite/"
+            class="inline-flex items-center justify-center px-8 py-3.5 border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white font-medium rounded-lg transition-colors text-base"
+          >
+            Explore Security Suite
+          </a>
+        </div>
+        <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-slate-400">
+          <a href={`tel:${site.phoneRaw}`} class="flex items-center gap-2 hover:text-white transition-colors" data-event="phone_click" data-location="hero">
+            📞 {site.phone}
+          </a>
+          <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-white transition-colors" data-event="whatsapp_click" data-location="hero">
+            💬 WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar items={trustItems} variant="dark" />
+
+  <!-- Products Grid -->
+  <section id="products" class="py-20 bg-[#0a0f1a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-sm font-semibold text-red-400 uppercase tracking-widest mb-2">
+          Security Products
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white">
+          Seven Products. Complete Coverage.
+        </h2>
+        <p class="mt-3 text-slate-400 max-w-2xl mx-auto">
+          From network perimeter to web applications to monitoring — Surakshitam covers every layer of your security needs.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {surakshitamProducts.map((product) => (
+          <ProductCard
+            name={product.name}
+            title={product.title}
+            summary={product.summary}
+            href={`/${product.slug}/`}
+            cta={product.cta}
+            accentColor={product.accentColor}
+            variant="dark"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem section -->
+  <section class="py-20 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-sm font-semibold text-red-400 uppercase tracking-widest mb-3">The Reality</p>
+          <h2 class="text-3xl font-bold text-white mb-5">
+            Most organizations are one attack away from a serious incident
+          </h2>
+          <ul class="space-y-3">
+            {[
+              "Firewall not updated or misconfigured since installation",
+              "No visibility into what is happening on the network",
+              "Web applications with OWASP Top 10 vulnerabilities",
+              "Staff working remotely without proper VPN controls",
+              "No formal vulnerability assessment ever conducted",
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-slate-300">
+                <span class="text-red-400 mt-0.5 shrink-0">✗</span>{item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-emerald-400 uppercase tracking-widest mb-3">The Surakshitam Approach</p>
+          <h2 class="text-3xl font-bold text-white mb-5">
+            Comprehensive defense, managed for you
+          </h2>
+          <ul class="space-y-3">
+            {[
+              "Managed firewall with continuous monitoring and alerting",
+              "Regular vulnerability scans across networks and applications",
+              "Web application firewall protecting your public-facing systems",
+              "Secure VPN for remote teams and site-to-site connectivity",
+              "Network monitoring with real-time threat detection",
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-slate-300">
+                <span class="text-emerald-400 mt-0.5 shrink-0">✓</span>{item}
+              </li>
+            ))}
+          </ul>
+          <a href="/security-assessment/" class="mt-8 inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg transition-colors" data-event="security_assessment_request" data-location="problem-section">
+            Get Free Assessment
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="py-20 bg-[#0a0f1a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <p class="text-sm font-semibold text-red-400 uppercase tracking-widest mb-2">Industries</p>
+        <h2 class="text-3xl font-bold text-white">Built for organizations that cannot afford a breach</h2>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {[
+          { name: "Education", href: "/industries/education/", emoji: "🎓" },
+          { name: "Healthcare", href: "/industries/healthcare/", emoji: "🏥" },
+          { name: "Manufacturing", href: "/industries/manufacturing/", emoji: "🏭" },
+          { name: "Hospitality", href: "/industries/hospitality/", emoji: "🏨" },
+          { name: "Government", href: `${cognexa.domain}/industries/government/`, emoji: "🏛️" },
+          { name: "E-commerce", href: "/security-assessment/", emoji: "🛒" },
+          { name: "Banking & Finance", href: "/security-assessment/", emoji: "🏦" },
+          { name: "SME Businesses", href: "/security-assessment/", emoji: "🏢" },
+        ].map((ind) => (
+          <a href={ind.href} class="flex flex-col items-center gap-2 p-4 rounded-xl border border-slate-800 hover:border-red-600 bg-slate-900/50 hover:bg-slate-900 transition-all text-center">
+            <span class="text-2xl">{ind.emoji}</span>
+            <span class="text-sm font-medium text-slate-300">{ind.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CogNexa cross-link -->
+  <section class="py-12 bg-slate-950 border-y border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-slate-400 text-sm">
+        Surakshitam is a cybersecurity suite by{" "}
+        <a href={cognexa.domain} target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline font-medium">
+          CogNexa Technologies
+        </a>
+        {" "}— also providing AI automation, data management, and custom software development.
+      </p>
+    </div>
+  </section>
+
+  <FAQ items={cybersecurityFaqs} variant="dark" />
+
+  <CTASection
+    eyebrow="Get Started"
+    title="Not sure where your security gaps are?"
+    description="Book a free initial assessment. Our team will review your current setup, identify high-risk areas, and suggest practical next steps."
+    primaryLabel="Get Free Security Assessment"
+    primaryHref="/security-assessment/"
+    primaryEvent="security_assessment_request"
+    secondaryLabel="Call Us Now"
+    secondaryHref={`tel:${site.phoneRaw}`}
+    variant="dark"
+  />
+</MarketingLayout>

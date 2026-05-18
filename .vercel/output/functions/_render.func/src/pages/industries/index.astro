@@ -1,0 +1,37 @@
+---
+import MarketingLayout from "../../layouts/MarketingLayout.astro";
+import CTASection from "../../components/shared/CTASection.astro";
+import Breadcrumbs from "../../components/shared/Breadcrumbs.astro";
+import { industries } from "../../data/industries";
+---
+
+<MarketingLayout
+  title="Industries | Surakshitam Cybersecurity"
+  description="Surakshitam provides cybersecurity solutions for education, healthcare, manufacturing, and hospitality sectors. See industry-specific security products."
+>
+  <div class="bg-[#0a0f1a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <Breadcrumbs crumbs={[{ label: "Home", href: "/" }, { label: "Industries" }]} variant="dark" />
+    </div>
+    <section class="pt-8 pb-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h1 class="text-4xl font-extrabold text-white mb-4">Industries We Serve</h1>
+          <p class="text-slate-400 max-w-2xl mx-auto">
+            Cybersecurity requirements differ across industries. See how Surakshitam addresses the specific security challenges of your sector.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {industries.filter(i => ["education", "healthcare", "manufacturing", "hospitality"].includes(i.slug)).map((ind) => (
+            <a href={`/industries/${ind.slug}/`} class="group block rounded-2xl border border-slate-800 bg-slate-900 p-6 hover:border-red-600 transition-all">
+              <h2 class="text-lg font-bold text-white mb-2 group-hover:text-red-400 transition-colors">{ind.name}</h2>
+              <p class="text-sm text-slate-400 leading-relaxed mb-4">{ind.summary}</p>
+              <p class="text-sm text-red-400">View security solutions →</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+    <CTASection title="Not seeing your industry?" description="We work with many types of organizations. Tell us your requirements." primaryLabel="Contact Us" primaryHref="/contact/" variant="dark" />
+  </div>
+</MarketingLayout>

@@ -1,0 +1,34 @@
+import { c as createComponent } from './astro-component_Bsk0LsZR.mjs';
+import { s as renderComponent, v as renderTemplate, r as maybeRenderHead, k as addAttribute } from './entrypoint_CPbSosTj.mjs';
+import { $ as $$MarketingLayout } from './MarketingLayout_riPevCB9.mjs';
+import { $ as $$CTASection } from './CTASection_DHQhdjLZ.mjs';
+import { s as siteConfig } from './WhatsAppButton_Cgmmkd98.mjs';
+
+const $$Pricing = createComponent(($$result, $$props, $$slots) => {
+  const site = siteConfig.surakshitam;
+  return renderTemplate`${renderComponent($$result, "MarketingLayout", $$MarketingLayout, { "title": "Pricing | Surakshitam Cybersecurity Suite", "description": "Surakshitam pricing is customized based on your organization's size, requirements, and selected products. Request a quote or security assessment." }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<section class="py-16 md:py-24 bg-[#0a0f1a]"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"> <p class="text-sm font-semibold text-red-400 uppercase tracking-widest mb-3">Pricing</p> <h1 class="text-3xl md:text-4xl font-bold text-white mb-5">Pricing Based on Your Requirements</h1> <p class="text-slate-300 leading-relaxed mb-8 max-w-2xl mx-auto">
+Surakshitam products are priced based on your organization's size, selected products, deployment complexity, and required level of management. We do not publish one-size pricing because every organization's situation is different.
+</p> <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10"> ${[
+    { title: "Assessment First", desc: "We start with a free security assessment to understand your requirements before recommending specific products and pricing." },
+    { title: "No Hidden Costs", desc: "Our pricing includes deployment, configuration, and ongoing management. We are transparent about what is included." },
+    { title: "Flexible Engagement", desc: "Monthly managed service or annual contract options available depending on your preference and budget cycle." }
+  ].map((item) => renderTemplate`<div class="rounded-xl bg-slate-900 border border-slate-800 p-6 text-left"> <h3 class="font-bold text-white mb-2">${item.title}</h3> <p class="text-sm text-slate-400 leading-relaxed">${item.desc}</p> </div>`)} </div> <div class="flex flex-col sm:flex-row gap-4 justify-center"> <a href="/security-assessment/" class="inline-flex items-center justify-center px-8 py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg transition-colors" data-event="security_assessment_request" data-location="pricing">
+Request Security Assessment
+</a> <a${addAttribute(`tel:${site.phoneRaw}`, "href")} class="inline-flex items-center justify-center px-8 py-3 border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white rounded-lg transition-colors" data-event="phone_click" data-location="pricing">
+📞 Call for Quote
+</a> </div> </div> </section> ${renderComponent($$result2, "CTASection", $$CTASection, { "title": "Get an accurate quote for your organization", "description": "Book a free assessment. We will understand your requirements and give you a clear, honest quote.", "primaryLabel": "Book Free Assessment", "primaryHref": "/security-assessment/", "variant": "dark" })} ` })}`;
+}, "/Users/dilipparmar/projects2/cognexa/apps/surakshitam/src/pages/pricing.astro", void 0);
+
+const $$file = "/Users/dilipparmar/projects2/cognexa/apps/surakshitam/src/pages/pricing.astro";
+const $$url = "/pricing";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$Pricing,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

@@ -1,0 +1,60 @@
+---
+import MarketingLayout from "../layouts/MarketingLayout.astro";
+import ProductCard from "../components/shared/ProductCard.astro";
+import CTASection from "../components/shared/CTASection.astro";
+import Breadcrumbs from "../components/shared/Breadcrumbs.astro";
+import { surakshitamProducts } from "../data/products";
+import { siteConfig } from "../data/site";
+
+const site = siteConfig.surakshitam;
+---
+
+<MarketingLayout
+  title="Complete Cybersecurity Suite | Surakshitam"
+  description="Surakshitam offers 7 cybersecurity products: Kavach (Firewall), Durg (VA), Shastra (Pen Testing), Raksha (WAF), Setu (VPN), Pravesh (Captive Portal), Netra (Monitoring)."
+>
+  <div class="bg-[#0a0f1a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <Breadcrumbs crumbs={[{ label: "Home", href: "/" }, { label: "Cybersecurity Suite" }]} variant="dark" />
+    </div>
+    <section class="pt-8 pb-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <p class="text-sm font-semibold text-red-400 uppercase tracking-widest mb-2">Full Suite</p>
+          <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+            The Surakshitam Cybersecurity Suite
+          </h1>
+          <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+            Seven integrated products covering every layer of your organization's security — network, application, access, and monitoring.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+          {surakshitamProducts.map((product) => (
+            <ProductCard
+              name={product.name}
+              title={product.title}
+              summary={product.summary}
+              href={`/${product.slug}/`}
+              cta={product.cta}
+              accentColor={product.accentColor}
+              variant="dark"
+            />
+          ))}
+        </div>
+        <div class="text-center">
+          <a href="/security-assessment/" class="inline-flex items-center justify-center px-8 py-3.5 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg transition-colors" data-event="security_assessment_request" data-location="suite-overview">
+            Get Free Security Assessment
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <CTASection
+      title="Need complete protection?"
+      description="Request a security assessment. We will design the right combination of products for your organization's risk profile and budget."
+      primaryLabel="Request Assessment"
+      primaryHref="/security-assessment/"
+      variant="dark"
+    />
+  </div>
+</MarketingLayout>

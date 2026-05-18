@@ -1,0 +1,208 @@
+---
+export const prerender = true;
+
+import MarketingLayout from "../layouts/MarketingLayout.astro";
+import CTASection from "../components/shared/CTASection.astro";
+import FAQ from "../components/shared/FAQ.astro";
+import RelatedServices from "../components/shared/RelatedServices.astro";
+import Breadcrumbs from "../components/shared/Breadcrumbs.astro";
+import LeadForm from "../components/shared/LeadForm.astro";
+import { surakshitamProducts } from "../data/products";
+import { kavachFaqs, durgFaqs, shastraFaqs } from "../data/faqs";
+import { siteConfig } from "../data/site";
+import type { FAQ as FAQType } from "../data/faqs";
+
+export function getStaticPaths() {
+  return surakshitamProducts.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const site = siteConfig.surakshitam;
+const cognexa = siteConfig.cognexa;
+
+const faqMap: Record<string, FAQType[]> = {
+  "kavach-managed-firewall": kavachFaqs,
+  "durg-vulnerability-scanner": durgFaqs,
+  "shastra-penetration-testing": shastraFaqs,
+};
+
+const faqs = faqMap[product.slug] ?? [];
+
+const related = surakshitamProducts
+  .filter((p) => product.relatedSlugs.includes(p.slug))
+  .map((p) => ({
+    name: `${p.name} — ${p.title}`,
+    summary: p.summary,
+    href: `/${p.slug}/`,
+  }));
+
+const allServices = surakshitamProducts.map((p) => `${p.name} — ${p.title}`);
+---
+
+<MarketingLayout
+  title={`${product.name} — ${product.title} | Surakshitam`}
+  description={`${product.summary} Request a free security assessment from Surakshitam by CogNexa.`}
+>
+  <div class="bg-[#0a0f1a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <Breadcrumbs
+        crumbs={[
+          { label: "Home", href: "/" },
+          { label: "Products", href: "/cybersecurity-suite/" },
+          { label: `${product.name} — ${product.title}` },
+        ]}
+        variant="dark"
+      />
+    </div>
+
+    <!-- Hero -->
+    <section class="pt-8 pb-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest mb-3" style={`color: ${product.accentColor}`}>
+              {product.name}
+            </p>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-3 text-balance">
+              {product.title}
+            </h1>
+            <p class="text-lg text-slate-300 italic mb-5">{product.tagline}</p>
+            <p class="text-slate-300 leading-relaxed mb-8">{product.description}</p>
+
+            <div class="flex flex-col sm:flex-row gap-4 mb-8">
+              <a
+                href="/security-assessment/"
+                class="inline-flex items-center justify-center px-7 py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg transition-colors"
+                data-event="security_assessment_request"
+                data-location="hero"
+                data-service={product.name}
+              >
+                {product.cta}
+              </a>
+              <a
+                href={`tel:${site.phoneRaw}`}
+                class="inline-flex items-center justify-center px-7 py-3 border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white rounded-lg transition-colors"
+                data-event="phone_click"
+                data-location="hero"
+              >
+                📞 {site.phone}
+              </a>
+            </div>
+
+            <!-- Features -->
+            <div class="rounded-xl border p-5" style={`border-color: ${product.accentColor}33`}>
+              <h3 class="font-semibold text-white mb-3">Key Features</h3>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {product.features.map((f) => (
+                  <li class="flex items-start gap-2 text-sm text-slate-300">
+                    <span class="mt-0.5 shrink-0" style={`color: ${product.accentColor}`}>✓</span>{f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <div>
+            <LeadForm
+              title={product.cta}
+              subtitle="We will get back to you within 24 hours."
+              services={allServices}
+              variant="dark"
+              compact={true}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="py-16 bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-6">Business Benefits</h2>
+            <ul class="space-y-3">
+              {product.benefits.map((b) => (
+                <li class="flex items-start gap-3 text-slate-300">
+                  <span class="mt-0.5 shrink-0 text-emerald-400">✓</span>{b}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-6">Use Cases</h2>
+            <ul class="space-y-3">
+              {product.useCases.map((u) => (
+                <li class="flex items-start gap-3 text-slate-300">
+                  <span class="mt-0.5 shrink-0" style={`color: ${product.accentColor}`}>→</span>{u}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deployment options + Audiences -->
+    <section class="py-16 bg-[#0a0f1a]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div class="rounded-xl bg-slate-900 border border-slate-800 p-6">
+            <h3 class="font-bold text-white mb-4">Deployment Options</h3>
+            <ul class="space-y-2">
+              {product.deploymentOptions.map((d) => (
+                <li class="flex items-start gap-2 text-sm text-slate-300">
+                  <span class="shrink-0" style={`color: ${product.accentColor}`}>▸</span>{d}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="rounded-xl bg-slate-900 border border-slate-800 p-6">
+            <h3 class="font-bold text-white mb-4">Who Needs This</h3>
+            <ul class="space-y-2">
+              {product.audiences.map((a) => (
+                <li class="flex items-start gap-2 text-sm text-slate-300">
+                  <span class="shrink-0 text-slate-500">›</span>{a}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {faqs.length > 0 && (
+      <FAQ items={faqs} variant="dark" />
+    )}
+
+    <RelatedServices
+      title="Related Security Products"
+      items={related}
+      variant="dark"
+    />
+
+    <!-- Cross-link to CogNexa -->
+    <section class="py-10 bg-slate-950 border-y border-slate-800">
+      <div class="max-w-4xl mx-auto px-4 text-center text-sm text-slate-400">
+        {product.name} is part of the Surakshitam cybersecurity suite by{" "}
+        <a href={cognexa.domain} target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">
+          CogNexa Technologies
+        </a>
+        . CogNexa also offers AI automation, data management, and custom software development.
+      </div>
+    </section>
+
+    <CTASection
+      title={`Ready to deploy ${product.name}?`}
+      description={`Request a free assessment. We will review your current setup and recommend the right approach for your organization.`}
+      primaryLabel={product.cta}
+      primaryHref="/security-assessment/"
+      primaryEvent="security_assessment_request"
+      variant="dark"
+    />
+  </div>
+</MarketingLayout>

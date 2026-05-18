@@ -1,0 +1,29 @@
+---
+import MarketingLayout from "../layouts/MarketingLayout.astro";
+import { siteConfig } from "../data/site";
+const site = siteConfig.surakshitam;
+---
+<MarketingLayout title="Privacy Policy | Surakshitam" description="Surakshitam privacy policy.">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-slate-300">
+    <h1 class="text-3xl font-bold text-white mb-6">Privacy Policy</h1>
+    <p class="text-sm text-slate-500 mb-8">Last updated: May 2026</p>
+    <div class="space-y-8 text-sm leading-relaxed">
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-2">Information We Collect</h2>
+        <p>When you submit a form, we collect your name, phone, email, company, and message. We also collect web analytics data and UTM parameters for marketing attribution.</p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-2">How We Use It</h2>
+        <p>Submitted information is used solely to respond to your enquiry. We do not sell personal information to third parties.</p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-2">Analytics</h2>
+        <p>We use Google Analytics 4 to understand website usage. This collects anonymised data.</p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-2">Contact</h2>
+        <p>For privacy queries, contact <a href={`mailto:${site.email}`} class="text-red-400 hover:underline">{site.email}</a>.</p>
+      </section>
+    </div>
+  </div>
+</MarketingLayout>

@@ -1,0 +1,79 @@
+---
+export const prerender = true;
+
+import MarketingLayout from "../../layouts/MarketingLayout.astro";
+import CTASection from "../../components/shared/CTASection.astro";
+import Breadcrumbs from "../../components/shared/Breadcrumbs.astro";
+import { industries } from "../../data/industries";
+import { siteConfig } from "../../data/site";
+
+const allowedSlugs = ["education", "healthcare", "manufacturing", "hospitality"];
+
+export function getStaticPaths() {
+  return industries
+    .filter((ind) => ["education", "healthcare", "manufacturing", "hospitality"].includes(ind.slug))
+    .map((ind) => ({ params: { slug: ind.slug }, props: { industry: ind } }));
+}
+
+const { industry } = Astro.props;
+---
+
+<MarketingLayout
+  title={`Cybersecurity for ${industry.name} | Surakshitam`}
+  description={`Surakshitam provides cybersecurity solutions tailored for the ${industry.name.toLowerCase()} sector. See our recommended products.`}
+>
+  <div class="bg-[#0a0f1a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <Breadcrumbs
+        crumbs={[
+          { label: "Home", href: "/" },
+          { label: "Industries", href: "/industries/" },
+          { label: industry.name },
+        ]}
+        variant="dark"
+      />
+    </div>
+    <section class="pt-8 pb-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-12">
+          <p class="text-sm font-semibold text-red-400 uppercase tracking-widest mb-3">{industry.name}</p>
+          <h1 class="text-4xl font-extrabold text-white mb-4 text-balance">
+            Cybersecurity Solutions for {industry.name}
+          </h1>
+          <p class="text-slate-300">{industry.summary}</p>
+        </div>
+
+        <div class="mb-10">
+          <h2 class="text-xl font-bold text-white mb-4">Common Security Challenges</h2>
+          <ul class="space-y-2">
+            {industry.challenges.map((c) => (
+              <li class="flex items-start gap-3 text-slate-300">
+                <span class="text-red-400 mt-0.5 shrink-0">✗</span>{c}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-white mb-5">Recommended Surakshitam Products</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {industry.surakshitam.map((item) => (
+              <a href={`/${item.productSlug}/`} class="block rounded-xl border border-slate-800 bg-slate-900 p-5 hover:border-red-600 transition-colors">
+                <p class="font-semibold text-red-400">{item.label}</p>
+                <p class="text-xs text-slate-500 mt-1">Learn More →</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CTASection
+      title={`Protect your ${industry.name.toLowerCase()} organization`}
+      description="Get a free security assessment. We will recommend the right products for your sector."
+      primaryLabel="Get Free Security Assessment"
+      primaryHref="/security-assessment/"
+      variant="dark"
+    />
+  </div>
+</MarketingLayout>
